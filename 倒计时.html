@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <style>
+        .time {
+            font-family: "微软雅黑";
+        }
+    </style>
+</head>
+
+<body>
+    <div style="width:300px;height:200px;background:lightgrey;" class="totalDiv">
+        <button style="color:black;background-color:aquamarine;">倒计时</button>
+        <div style='color:red;font-size:16px;margin-top:40px;margin-left:20px'>离预约失效的时间:
+            <br>
+            <b>
+                <span class='container'>10分50秒,</span>
+            </b>
+        </div>
+        <div style='color:red;font-size:16px;margin-top:40px;margin-left:20px'>离预约失效的时间:
+            <br>
+            <b>
+                <span class='container'>3分38秒,</span>
+            </b>
+        </div>
+    </div>
+    <script type='text/javascript'>
+        var remainTime = $("body").find(".container").text();
+        var clock = remainTime.split(",");
+        var countDownTimes = [];
+        clock.pop();
+        for (var i = 0; i < clock.length; i++) { //获取总时间
+            var second = clock[i].slice(-4, -1); //秒数
+            var minu = clock[i].slice(0, 2); //分钟数
+            /* 以下的if都是为了将X分x秒转换成00：00格式 */
+            if (second.substr(0, 1) === '分') {
+                second = second.slice(1, 3);
+            }
+            if (second.substr(1, 1) == '分') {
+                second = second.slice(2, 3);
+            }
+            if (second < 0) {
+                second = 60 + parseInt(second);
+                second = second.toString();
+                minu = parseInt(minu);
+                minu = minu - 1;
+                minu = minu.toString();
+            }
+            if (minu.substr(minu.length - 1, 1) == '分') {
+                minu = minu.slice(0, 1);
+            }
+            if (minu.length == 1 || minu.length == 0) {
+                minu = "0" + minu;
+            }
+            if (second.length == 1) {
+                second = "0" + second;
+            }
+            time = minu + ":" + second;
+            countDownTimes[i] = parseInt(minu * 60 + second * 1); //开始：转换成总秒数    
+            /* cutTime(countDownTime); */
+        }
+        var timeContainer = $('.container');
+        for (var j = 0; j < countDownTimes.length; j++) {
+            var countDownTime = countDownTimes[j];
+            cutTime(countDownTime,timeContainer[j]);
+        }
+        function cutTime(countDownTime, container) {
+            var timer = setInterval(function () {
+                if (countDownTime >= 0) {
+                    showTime(countDownTime, container);
+                    countDownTime--;
+                } else {
+                    clearInterval(timer);
+                    alert("计时结束,给出提示");
+                }
+            }, 1000);
+        }
+        function showTime(countDownTime, container) {
+            var minute = Math.floor(countDownTime / 60);
+            var seconds = countDownTime - 60 * minute;
+            minute = minute.toString();
+            seconds = seconds.toString();
+            if (minute.length == 1) {
+                minute = "0" + minute;
+            }
+            if (seconds.length == 1) {
+                seconds = "0" + seconds;
+            }
+            time = minute + ":" + seconds;
+            /* 显示时间 */
+            $(container).text(time);
+        }
+    </script>
+</body>
+
+</html>

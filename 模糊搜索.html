@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>模糊搜索</title>
+    <link href="https://cdn.bootcss.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery-autocomplete/1.0.7/jquery.auto-complete.min.css" rel="stylesheet">
+    <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-autocomplete/1.0.7/jquery.auto-complete.min.js"></script>
+    <script src="https://cdn.bootcss.com/jqueryui/1.12.1/jquery-ui.min.js"></script>
+</head>
+<style>
+     #ui-id-1{
+         background: lightblue;
+         color:white;
+         width:400px;
+         overflow: hidden;
+         padding-left: 0px;
+     }
+     #ui-id-1 li:nth-child(2n+1){
+         background: yellowgreen;
+     }
+    #ui-id-1 li.ui-menu-item{
+        list-style-type:none;
+        width:400px;
+        padding-top:4px;
+        padding-bottom: 4px;
+        cursor:pointer;
+        padding-left: 10px;
+    }
+    div.ui-helper-hidden-accessible{
+        display: none;
+    }
+</style>
+<body>
+    <form class="form-inline" role="form">
+        <div style='margin:0 auto;padding-top:80px'>
+            <label for="searchBox">模糊搜索</label>
+            <input type='text' id='searchBox' class='form-control' style='width:400px'>
+        </div>
+    </form>
+
+    <script>
+       $(function() {
+        var availableTags = [
+          "李乃器",
+          "林立",
+          "林李子",
+          "欧阳斌",
+          "陈斌字",
+          "林生斌",
+          "水分析4",
+          "岩石分析2",
+          "土壤分析3",
+          "水分析4",
+          "Fortran",
+          "Groovy",
+          "Haskell",
+          "Java",
+          "JavaScript",
+          "Lisp",
+          "Perl",
+          "PHP",
+          "Python",
+          "Ruby",
+          "Scala",
+          "Scheme"
+        ];
+        $( "#searchBox" ).autocomplete({
+          source: availableTags
+        });
+      });
+    </script>
+
+</body>
+
+</html>
