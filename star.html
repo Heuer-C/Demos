@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>星星实现图片上传</title>
+    <link href="https://cdn.bootcss.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./css/iconfont.css">
+    <script src="https://cdn.bootcss.com/jquery/3.2.0/jquery.min.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
+</head>
+<style>
+    a {
+        text-decoration: none !important;
+        color: gainsboro;
+    }
+
+    a i {
+        font-size: 40px !important;
+    }
+
+    div {
+        position: absolute;
+        top: 20%;
+        left: 40%
+    }
+    div#group a.starClick{
+        color: orange;
+    }
+    div  a.starInit{
+        color:gainsboro;
+    }
+    a.starInit:hover{
+        color: orange;
+    }
+</style>
+
+<body>
+    <div id='group'>
+        <input type="radio" id="1" class='i1' name='starGroup'>
+        <a href="#1" class="s1">
+            <label for="1">
+                <i class="iconfont icon-shoucang"></i>
+            </label>
+        </a>
+        <input type="radio" id="2" class='i2' name='starGroup'>
+        <a href="#2" class='s2'>
+            <label for="2">
+                <i class="iconfont icon-shoucang"></i>
+            </label>
+        </a>
+        <input type="radio" id="3" class='i3' name='starGroup'>
+        <a href="#3" class='s3'>
+            <label for="3">
+                <i class="iconfont icon-shoucang"></i>
+            </label>
+        </a>
+        <input type="radio" id="4" class='i4' name='starGroup'>
+        <a href="#4" class='s4'>
+            <label for="4">
+                <i class="iconfont icon-shoucang"></i>
+            </label>
+        </a>
+        <input type="radio" id="5" class='i5' name='starGroup'>
+        <a href="#5" class='s5'>
+            <label for="5">
+                <i class="iconfont icon-shoucang"></i>
+            </label>
+        </a>
+    </div>
+
+    <script>
+        for (let i = 1; i < 6; i++) {
+           /*  $(".s" + i).mouseover(function () {
+                for (let j = 1; j < i + 1; j++) {
+                    $(".s" + j).addClass("starOver");
+                }
+            }); */
+            $(".s" + i).click(function () {
+               var index=(($(this).index())-1)/2;
+               for(var j=0;j<index+1;j++){
+                $(".s" + (j+1)).addClass("starClick");
+               }
+            });
+            $(".s" + i).mouseout(function () {
+                for (let j = 1; j < i + 1; j++) {
+                    $(".s" + j).addClass("starInit");
+                }
+            });
+            
+        }
+    </script>
+</body>
+
+</html>

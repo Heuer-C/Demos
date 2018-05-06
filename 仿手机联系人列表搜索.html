@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+    <title>联系人搜索列表</title>
+    <link href="css/style.css" rel="stylesheet" type="text/css">
+    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+    <div class="container">
+        <input id="content" type="text" class="form-control" placeholder="按设备名顺序查找" style="margin:30px 0;">
+        <!-- 字母顺序 -->
+        <div id="syyy_zmsx" class="container" style="background-color:beige">
+
+        </div>
+    </div>
+
+
+
+    <script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>
+    <script type="text/javascript" src="js/zepto.js"></script>
+    <script type="text/javascript" src="js/dataSource.js"></script>
+    <script src="https://cdn.bootcss.com/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="js/jQuery.Hz2Py-min.js"></script>
+    <script type="text/javascript">
+       console.log(equipments.length);
+        function changePin(){
+            for(var i=0;i<equipments.length;i++){
+                var equipName=equipments[i].equipmentsName;
+                var that=equipName;
+                console.log($(that).toPinyin());
+            }
+        }
+        changePin()
+    </script>
+</body>
+
+</html>
